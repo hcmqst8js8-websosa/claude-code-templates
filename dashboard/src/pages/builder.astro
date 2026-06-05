@@ -1,0 +1,12 @@
+---
+import DashboardLayout from '../layouts/DashboardLayout.astro';
+import ProjectsList from '../components/builder/ProjectsList';
+
+export const prerender = false;
+---
+
+<DashboardLayout title="App Builder - AI Templates">
+  <div class="h-full bg-[#0a0a0a]">
+    <ProjectsList client:load />
+  </div>
+</DashboardLayout>
