@@ -1,0 +1,41 @@
+---
+import AppBuilder from '../../components/builder/AppBuilder';
+import ClerkIsland from '../../components/ClerkIsland';
+import '../../styles/global.css';
+
+export const prerender = false;
+
+const { projectId } = Astro.params;
+
+const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+if (!projectId || !uuidRegex.test(projectId)) {
+  return Astro.redirect('/builder');
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Builder - AI Templates</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-[#0a0a0a] text-white antialiased overflow-hidden"
+    style="font-family: 'Geist', system-ui, sans-serif;"
+  >
+    <AppBuilder
+      client:load
+      projectId={projectId}
+      projectName="Loading…"
+    />
+    <ClerkIsland client:load />
+  </body>
+</html>
